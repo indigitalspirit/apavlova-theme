@@ -46,70 +46,28 @@ get_template_part('menuandpreloader');
 				<div class="row">
 
 					<!-- items -->
-					<div class="col-md-4">
-						<div class="item">
-							<span class="icon"><i class="fa fa-code" aria-hidden="true"></i></span>
-							<h6>Разработка сайтa</h6>
-							<p>Создание сайта «с нуля»: лендинг, многостраничный сайт, сайт-визитка или персональный сайт.</p>
+					<?php 
+						$apavlova_theme_services_args = array( 'post_type' => 'services' );
+
+						$apavlova_theme_services_query = new WP_Query( $apavlova_theme_services_args );
+						
+						while ( $apavlova_theme_services_query->have_posts() ) {
+							$apavlova_theme_services_query->the_post();
+
+					?>
+
+						<div class="col-md-4">
+							<div class="item">
+								<span class="icon">иконка<i class="fa fa-code" aria-hidden="true"></i></span>
+								<h6><?php the_title(); ?></h6>
+								<p><?php the_excerpt(); ?></p>
+							</div>
 						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="item">
-							<span class="icon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-							<h6>Обновление функций</h6>
-							<p>Добавление или исправление страниц, форм, калькуляторов, галерей, плагинов WordPress и др.</p>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="item">
-							<span class="icon"><i class="fa fa-laptop" aria-hidden="true"></i></span>
-							<h6>Редизайн сайта</h6>
-							<p>Обновление внешнего вида сайта, адаптация под мобильные устройства и различные браузеры.</p>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="item">
-							<span class="icon"><i class="fa fa-laptop" aria-hidden="true"></i></span>
-							<h6>Web Design</h6>
-							<p>Lorem Ipsum is simply dummy text of the Lorem Ipsum has been the industry's standard dummy text ever</p>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="item">
-							<span class="icon"><i class="fa fa-bullhorn" aria-hidden="true"></i></span>
-							<h6>Branding</h6>
-							<p>Lorem Ipsum is simply dummy text of the Lorem Ipsum has been the industry's standard dummy text ever</p>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="item">
-							<span class="icon"><i class="fa fa-umbrella" aria-hidden="true"></i></span>
-							<h6>Development</h6>
-							<p>Lorem Ipsum is simply dummy text of the Lorem Ipsum has been the industry's standard dummy text ever</p>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="item">
-							<span class="icon"><i class="fa fa-diamond" aria-hidden="true"></i></span>
-							<h6>Creative Design</h6>
-							<p>Lorem Ipsum is simply dummy text of the Lorem Ipsum has been the industry's standard dummy text ever</p>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="item">
-							<span class="icon"><i class="fa fa-television" aria-hidden="true"></i></span>
-							<h6>Fully Responsive</h6>
-							<p>Lorem Ipsum is simply dummy text of the Lorem Ipsum has been the industry's standard dummy text ever</p>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="item">
-							<span class="icon"><i class="fa fa-camera" aria-hidden="true"></i></span>
-							<h6>Retina Ready</h6>
-							<p>Lorem Ipsum is simply dummy text of the Lorem Ipsum has been the industry's standard dummy text ever</p>
-						</div>
-					</div>
-					
+
+					<?php			
+						}
+						wp_reset_postdata();
+					?>
 				</div><!-- /row -->
 			</div><!-- /container -->
 		</section>

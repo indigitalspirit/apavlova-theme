@@ -22,6 +22,25 @@
 				style="width:80px; height:15px; border:0; margin-top: 5px;" alt="Яндекс.Метрика" title="Яндекс.Метрика: данные за сегодня (просмотры)" /></a>
 				<!-- /Yandex.Metrika informer -->
 			</div>
+			<div class="row">
+				<div class="social-icon">
+					<a href="//vk.com/nastya_karelskaya" target="_blank">
+						<span><i class="fa fa-vk" aria-hidden="true"></i></span>
+					</a>
+					<a href="//www.instagram.com/nastya_karelskaya/" target="_blank">
+						<span><i class="fa fa-instagram" aria-hidden="true"></i></span>
+					</a>
+					<a href="//t.me/@nastya_karelskaya" target="_blank">
+						<span><i class="fa fa-telegram" aria-hidden="true"></i></span>
+					</a>
+					<a href="//www.linkedin.com/comm/in/nastya-karelskaya" target="_blank">
+						<span><i class="fa fa-linkedin" aria-hidden="true"></i></span>
+					</a>
+					<a href="//www.facebook.com/nastya.karelskaya" target="_blank">
+						<span><i class="fa fa-facebook" aria-hidden="true"></i></span>
+					</a>
+				</div>
+			</div>
 		</div>
 	</footer>
 	<!--====== End Footer ======-->

@@ -323,7 +323,68 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 
 /** Custom post types ***/
 add_action('init', 'register_apavlova_portfolio');
+
 function register_apavlova_portfolio(){
+
+
+	//категория портфолио
+	register_taxonomy('categoriya_portfolio', array('portfolio'), array(
+		'label'                 => 'Категории портфолио', // определяется параметром $labels->name
+		'labels'                => array(
+			'name'              => 'Категории портфолио',
+			'singular_name'     => 'Категории портфолио',
+			'search_items'      => 'Искать категории портфолио',
+			'all_items'         => 'Все категории портфолио',
+			'parent_item'       => 'Родит. категория портфолио',
+			'parent_item_colon' => 'Родит. категория портфолио:',
+			'edit_item'         => 'Ред. категории портфолио',
+			'update_item'       => 'Обновить категории в портфолио',
+			'add_new_item'      => 'Добавить категории в портфолио',
+			'new_item_name'     => 'Новая категория в портфолио',
+			'menu_name'         => 'Категории портфолио',
+		),
+		'description'           => 'Рубрики для категорий портфолио', // описание таксономии
+		'public'                => true,
+		'show_in_nav_menus'     => false, // равен аргументу public
+		'show_ui'               => true, // равен аргументу public
+		'show_tagcloud'         => false, // равен аргументу show_ui
+		'hierarchical'          => true,
+		'rewrite'               => array('slug'=>'portfolio', 'hierarchical'=>false, 'with_front'=>false, 'feed'=>false ),
+		'show_admin_column'     => true, // Позволить или нет авто-создание колонки таксономии в таблице ассоциированного типа записи. (с версии 3.5)
+	) );
+
+	// тип записи - портфолио
+	register_post_type('portfolio', array(
+		'label'               => 'Портфолио',
+		'labels'              => array(
+			'name'          => 'Портфолио',
+			'singular_name' => 'Портфолио',
+			'menu_name'     => 'Портфолио',
+			'all_items'     => 'Портфолио',
+			'add_new'       => 'Добавить в портфолио',
+			'add_new_item'  => 'Добавить новое в портфолио',
+			'edit'          => 'Редактировать',
+			'edit_item'     => 'Редактировать портфолио',
+			'new_item'      => 'Новое в портфолио',
+		),
+		'description'         => '',
+		'public'              => true,
+		'publicly_queryable'  => true,
+		'show_ui'             => true,
+		'show_in_rest'        => false,
+		'rest_base'           => '',
+		'show_in_menu'        => true,
+		'exclude_from_search' => false,
+		'capability_type'     => 'post',
+		'map_meta_cap'        => true,
+		'hierarchical'        => false,
+		'rewrite'             => array( 'slug'=>'portfolio/%categoriya_portfolio%', 'with_front'=>false, 'pages'=>false, 'feeds'=>false, 'feed'=>false ),
+		'has_archive'         => 'portfolio',
+		'query_var'           => true,
+		'supports'            => array( 'title', 'editor' ),
+		'taxonomies'          => array( 'categoriya_portfolio' ),
+		'menu_icon' => 'dashicons-archive',
+	) );
 
 	// тип записи - портфолио
 	register_post_type('portfolio', array(

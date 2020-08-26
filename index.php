@@ -195,7 +195,31 @@ get_template_part('menuandpreloader');
 				<div class="row">
 
 					<!-- items -->
-					<div class="col-md-4">
+					<?php 
+						$apavlova_theme_services_args = array( 'post_type' => 'services' );
+
+						$apavlova_theme_services_query = new WP_Query( $apavlova_theme_services_args );
+						
+						while ( $apavlova_theme_services_query->have_posts() ) {
+							$apavlova_theme_services_query->the_post();
+
+					?>
+
+						<div class="col-md-4">
+							<div class="item">
+								<span class="icon">иконка<i class="fa fa-code" aria-hidden="true"></i></span>
+								<h6><?php the_title(); ?></h6>
+								<p><?php the_excerpt(); ?></p>
+							</div>
+						</div>
+
+					<?php			
+						}
+						wp_reset_postdata();
+					?>
+
+
+					<!-- <div class="col-md-4">
 						<div class="item">
 							<span class="icon"><i class="fa fa-code" aria-hidden="true"></i></span>
 							<h6>Разработка сайтa</h6>
@@ -215,49 +239,8 @@ get_template_part('menuandpreloader');
 							<h6>Редизайн сайта</h6>
 							<p>Обновление внешнего вида сайта, адаптация под мобильные устройства и различные браузеры.</p>
 						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="item">
-							<span class="icon"><i class="fa fa-laptop" aria-hidden="true"></i></span>
-							<h6>Web Design</h6>
-							<p>Lorem Ipsum is simply dummy text of the Lorem Ipsum has been the industry's standard dummy text ever</p>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="item">
-							<span class="icon"><i class="fa fa-bullhorn" aria-hidden="true"></i></span>
-							<h6>Branding</h6>
-							<p>Lorem Ipsum is simply dummy text of the Lorem Ipsum has been the industry's standard dummy text ever</p>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="item">
-							<span class="icon"><i class="fa fa-umbrella" aria-hidden="true"></i></span>
-							<h6>Development</h6>
-							<p>Lorem Ipsum is simply dummy text of the Lorem Ipsum has been the industry's standard dummy text ever</p>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="item">
-							<span class="icon"><i class="fa fa-diamond" aria-hidden="true"></i></span>
-							<h6>Creative Design</h6>
-							<p>Lorem Ipsum is simply dummy text of the Lorem Ipsum has been the industry's standard dummy text ever</p>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="item">
-							<span class="icon"><i class="fa fa-television" aria-hidden="true"></i></span>
-							<h6>Fully Responsive</h6>
-							<p>Lorem Ipsum is simply dummy text of the Lorem Ipsum has been the industry's standard dummy text ever</p>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="item">
-							<span class="icon"><i class="fa fa-camera" aria-hidden="true"></i></span>
-							<h6>Retina Ready</h6>
-							<p>Lorem Ipsum is simply dummy text of the Lorem Ipsum has been the industry's standard dummy text ever</p>
-						</div>
-					</div>
+					</div> -->
+					
 					
 				</div><!-- /row -->
 			</div><!-- /container -->
@@ -274,27 +257,30 @@ get_template_part('menuandpreloader');
 						<h3>Портфолио.</h3>
 					</div>
 
-					<!-- filter links -->
-					<div class="filtering text-center mb-50">
-						<span data-filter='*' class="active">Все</span>
-						<span data-filter='.landing'>Лендинги</span>
-						<span data-filter='.multiple-site'>Многостраничники</span>
-						<!-- <span data-filter='.wordpress'>WordPress</span> -->
-					</div>
 
 					<!-- gallery -->
 					<div class="gallery text-center">
 
 						<!-- gallery item -->
-						<div class="col-md-4 col-sm-6 items multiple-site">
+						<?php 
+							$apavlova_theme_portfolio_args = array( 'post_type' => 'portfolio', 'post_per_page' => 6 );
+
+							$apavlova_theme_portfolio_query = new WP_Query( $apavlova_theme_portfolio_args );
+							
+							while ( $apavlova_theme_portfolio_query->have_posts() ) {
+								$apavlova_theme_portfolio_query->the_post();
+
+						?>
+
+						<div class="col-md-4 col-sm-6 items">
 							<div class="item-img">
-								<img src="<?php echo get_template_directory_uri() . '/assets/img/portfolio/1.jpg';?>" alt="image">
+								<img src="<?php the_post_thumbnail_url(); ?>" alt="фото поста">
 								<div class="item-img-overlay">
 									<div class="overlay-info v-middle text-center">
-										<h6 class="sm-titl">Smartfix-ptz.ru</h6>
+										<h6 class="sm-titl"><?php the_title(); ?></h6>
 										<div class="icons">
 											<span class="icon ">
-												<a href="#portfolio-item-1" class="open-popup">
+												<a href="<?php the_permalink(); ?>" class="open-popup">
 													<i class="fa fa-search-plus" aria-hidden="true"></i>
 												</a>
 											</span>
@@ -302,543 +288,28 @@ get_template_part('menuandpreloader');
 									</div>
 								</div>
 							</div>
-							<div id="portfolio-item-1" class="portfolio-popup popup-window mfp-hide">
+							<div class="portfolio-popup popup-window mfp-hide">
 								<div class="popup-header">
 										<div class="popup-title">
 											<h5>
-												<a href="#0">Доработка сайта «Smartfix-ptz.ru»</a>
+												<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
 											</h5>
 										</div>
 								</div>
-								<div class="popup-body blogs">	
-									<div class="container">
-										<div class="row">
-											
-											<div class="col-12">
-												<div class="posts">
-						
-													<div class="post">
-														<div class="post-img">
-															<a href="//smartfix-ptz.ru" target="_blank">
-																<img src="<?php echo get_template_directory_uri() . '/assets/img/portfolio/sm-mac.PNG';?>" alt="Smartfix-ptz.ru">
-															</a>
-														</div>
-														<div class="content text-center">
-															<div class="post-meta">
-																<ul class="meta">
-																	<li>
-																		<div>
-																			<i class="fa fa-calendar" aria-hidden="true"></i>
-																			Июль-август 2018
-																		</div>
-																	</li>
-																	<li>
-																		<div>
-																			<i class="fa fa-tags" aria-hidden="true"></i>
-																			Многостраничные сайты
-																		</div>
-																	</li>
-																	
-																</ul>
-															</div>
-						
-															<div class="post-cont">
-																<p class="spical">
-																		<span>Цель проекта:</span> переделать исходный лендинг в многостраничный вариант.
-																</p>
-																<p class="descr">
-																		Владелец планирует запуск рекламы на сервисах Яндекс.Директ и Google.Adwords для пяти направлений услуг:
-																
-																	<ul class="post-ul">
-																		<li>Ремонт телефонов</li>
-																		<li>Ремонт планшетов</li>
-																		<li>Ремонт ноутбуков</li>
-																		<li>Ремонт фотоаппаратов</li>
-																		<li>Ремонт техники Apple (страницы для iPhone, iPad, MacBook)</li>
-																	</ul>
-																</p>
-																<p class="descr">
-																		Требуется добавить указанные направления услуг на сайт.
-																</p> 
-																
-																
-																<p class="spical">
-																		<span>Задачи проекта:</span>
-																</p>
-																<p class="descr">
-																	<ul class="post-ul">
-																		<li>Добавить новые страницы на сайт.
-																		Необходимо дополнить ресурс перечисленными страницами, выдержав единый стиль оформления. Страницы должны содержать блоки с информацией об услугах сервисного центра для каждой категории устройств, форму обратной связи, а также тексты, оптимизированные под SEO.
-																		</li>
-																		<li>Для страниц по ремонту техники Apple требуется предусмотреть возможность изменения стоимости услуг владельцем сайта.</li>
-																		<li>Оптимизировать все страницы сайта для SEO.</li>
-																		<li>Добавить функционал reCaptcha («капчу») для форм обратной связи на сайте.</li>
-																		<li>Адаптировать сайт под мобильные устройства.</li>
-																	</ul>
-																</p>
-
-																
-																<p class="spical">
-																		<span>Результат работы:</span>
-																</p>
-																<p class="descr">
-																	Все требования заказчика реализованы. 
-																	
-																	<ul class="post-ul">
-																		<li>Добавленные страницы содержат информацию об услугах, стоимости и принципах работы сервисного центра, а также тематические статьи на тему ремонта цифровой техники.</li>	
-															
-																		<li>В формах обратной связи используется «капча» для защиты от спама.</li>
-																		
-																		<li>Все страницы сайта SEO-оптимизированы, адаптированы под мобильные устройства. </li>
-
-																		<li>Создана панель администратора с базовым функционалом: авторизация пользователя, возможность смены пароля, возможность просмотра и перезаписи стоимости услуг для техники Apple.</li>
-																	</ul>
-																</p>
-
-																<p class="spical"><span>Используемые языки программирования, библиотеки и технологии: </span>
-
-																</p>
-																<p class="tags">
-																	<span>HTML5</span>, &nbsp;
-																	<span>CSS3</span>,&nbsp;
-																	<span>JavaScript</span>,&nbsp;
-																	<span>AJAX</span>,&nbsp;
-																	<span>jQuery v.3</span>,&nbsp;
-																	<span>Bootstrap v.4</span>,&nbsp;
-																	<span>PHP</span>,&nbsp;
-																	<span>MySQL</span>
-
-																</p>
-
-															</div>
-						
-															<div class="share-post" style="text-align: center;">
-																<span><a href="//smartfix-ptz.ru" target="_blank">Ссылка на проект</a></span>
-															</div>
-
-															<div class="order" style="margin-top: 20px;">
-																<span class="buton"><a href="#" class="call-to-act"  data-scroll-nav="6">Заказать сайт</a></span>
-															</div>
-														
-						
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div> 
-							</div>  <!-- ./portfolio-item -->
-						</div>
-						
-
-						<!-- gallery item -->
-						<div class="col-md-4 col-sm-6 items multiple-site">
-							<div class="item-img">
-								<img src="<?php echo get_template_directory_uri() . '/assets/img/portfolio/2.jpg';?>" alt="image">
-								<div class="item-img-overlay">
-									<div class="overlay-info v-middle text-center">
-										<h6 class="sm-titl">Events.com</h6>
-										<div class="icons">
-											<span class="icon">
-												<a href="#portfolio-item-2" class="open-popup">
-													<i class="fa fa-search-plus" aria-hidden="true"></i>
-												</a>
-											</span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div id="portfolio-item-2" class="portfolio-popup popup-window mfp-hide" style="padding: 25px;">
-								<div class="popup-header">
-											<div class="popup-title">
-												<h5>
-													<a href="#0">Доработка шаблона сайта «Events.com»</a>
-												</h5>
-											</div>
-								</div>
-								<div class="popup-body blogs">	
-									<div class="container">
-										<div class="row">
-											
-											<div class="col-12">
-												<div class="posts">
-						
-													<div class="post">
-														<div class="post-img">
-															<a href="//nastyakarelskaya.ru/hallo-welt/"  target="_blank">
-																<img src="<?php echo get_template_directory_uri() . '/assets/img/portfolio/events.png';?>" alt="Timo Lang website">
-															</a>
-														</div>
-														<div class="content text-center">
-															<div class="post-meta">
-																<ul class="meta">
-																	<li>
-																		<div>
-																			<i class="fa fa-calendar" aria-hidden="true"></i>
-																			Июнь 2018
-																		</div>
-																	</li>
-																	<li>
-																		<div>
-																			<i class="fa fa-tags" aria-hidden="true"></i>
-																			Многостраничные сайты
-																		</div>
-																	</li>
-																	
-																</ul>
-															</div>
-						
-															<div class="post-cont">
-																<p class="spical">
-																		<span>Цель проекта:</span> переделать исходный лендинг в многостраничный вариант.
-																</p>
-																<p class="descr">
-																		Владельцу требуется расширить шаблон сайта: превратить лендинг в многостраничный сайт. Необходимо добавить страницы:
-																
-																	<ul class="post-ul">
-																		<li>PRIVACY POLICY - страница с описанием политики конфиденциальности владельца.</li>
-																		<li>CONTACT US - страница с контактными данными компании.</li>
-																		<li>COMPANY DETAILS - страница с описанием компании.</li>
-																		<li>WHO WE ARE - страница с описанием сотрудников.</li>
-																		<li>OUR PRODUCTS - страница с описанием продуктов компании.</li>
-																		<li>OUR BRANDS - страница с описанием брендов компании.</li>
-																		<li>EVENTS - страница с описанием эвентов компании.</li>
-																		<li>FAQ - страница с ответами на часто задаваемые вопросы.</li>
-																	</ul>
-																</p>
-																
-																
-																
-																<p class="spical">
-																		<span>Задачи проекта:</span>
-																</p>
-																<p class="descr">
-																	<ul class="post-ul">
-																		<li>Добавить новые страницы на сайт.
-																		Необходимо дополнить ресурс перечисленными страницами, выдержав единый стиль оформления. Содержимое страниц может быть любым, но должно соответствовать тематике каждой страницы.
-																		</li>
-																		<li>Сайт должен быть спроектирован только для десктопных устройств (адаптация под мобильные устройства не требуется).</li>
-																		<li>Добавить Google-карту на страницу «CONTACT US».</li>
-																	</ul>
-																</p>
-
-																
-																<p class="spical">
-																		<span>Результат работы:</span>
-																</p>
-																<p class="descr">
-																	Все требования заказчика реализованы. 
-																	
-																	<ul class="post-ul">
-																		<li>Добавленные страницы содержат тематическую информацию, выдержаны в едином стиле и имеют анимационные эффекты некоторых элементов. </li>	
-															
-																		<li>На страницу «CONTACT US» добавлена Google-карта</li>
-																	</ul>
-																</p>
-																<p class="descr">
-																	Проект выполнен через фриланс-биржу 
-																	<a href="//upwork.com" target="_blank">«Upwork»</a>. 
-																</p>
-
-																<p class="spical"><span>Используемые языки программирования, библиотеки и технологии: </span>
-
-																</p>
-																<p class="tags">
-																	<span>HTML5</span>, &nbsp;
-																	<span>CSS3</span>,&nbsp;
-																	<span>JavaScript</span>
-																</p>
-
-
-															</div>
-						
-															<div class="share-post" style="text-align: center;">
-																<span><a href="//nastyakarelskaya.ru/hallo-welt/" target="_blank">Ссылка на проект</a></span>
-															</div>
-															<div class="order" style="margin-top: 20px;">
-																<span class="buton"><a href="#" class="call-to-act"  data-scroll-nav="6">Заказать сайт</a></span>
-															</div>
-															
-														
-						
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div> 
 							</div>  <!-- ./portfolio-item -->
 						</div>
 
-						<!-- gallery item -->
-						<div class="col-md-4 col-sm-6 items landing">
-							<div class="item-img">
-								<img src="<?php echo get_template_directory_uri() . '/assets/img/portfolio/3.jpg';?>" alt="image">
-								<div class="item-img-overlay">
-									<div class="overlay-info v-middle text-center">
-										<h6 class="sm-titl">Добрый картон</h6>
-										<div class="icons">
-											<span class="icon ">
-												<a href="#portfolio-item-3" class="open-popup">
-													<i class="fa fa-search-plus" aria-hidden="true"></i>
-												</a>
-											</span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div id="portfolio-item-3" class="portfolio-popup popup-window mfp-hide" >
-								<div class="popup-header">
-										<div class="popup-title">
-											<h5>
-												<a href="#0">Создание лендинга «Добрый картон»</a>
-											</h5>
-										</div>
-								</div>
-								<div class="popup-body blogs">	
-									<div class="container">
-										<div class="row">
-											
-											<div class="col-12">
-												<div class="posts">
+						<?php			
+							}
+							wp_reset_postdata();
+						?>
+
+						<div class="clearfix"></div>
+						<a href="/portfolio" data-scroll-nav="6" class="portfolio-all_buton" target="_blank">
+							<span class="buton">Посмотреть все</span>
+						</a>
 						
-													<div class="post">
-														<div class="post-img">
-															<a href="//nastyakarelskaya.ru/good-cardboard/"  target="_blank">
-																<img src="<?php echo get_template_directory_uri() . '/assets/img/portfolio/good-cardboard.png';?>" alt="Добрый картон">
-															</a>
-														</div>
-														<div class="content text-center">
-															<div class="post-meta">
-																<ul class="meta">
-																	<li>
-																		<div>
-																			<i class="fa fa-calendar" aria-hidden="true"></i>
-																			Май 2018
-																		</div>
-																	</li>
-																	<li>
-																		<div>
-																			<i class="fa fa-tags" aria-hidden="true"></i>
-																			Лендинги
-																		</div>
-																	</li>
-																	
-																</ul>
-															</div>
-						
-															<div class="post-cont">
-																<p class="spical">
-																		<span>Цель проекта:</span> создание лендинга для компании. 
-																		
-																</p>
-																<p class="descr">
-																		Компания занимается производством упаковки из гофрокартона.
-																</p>
-																
-																<p class="spical">
-																		<span>Задачи проекта:</span>
-																</p>
-																<p class="descr">
-																	<ul class="post-ul">
-																		<li>
-																			Верстка сайта по PSD-макету: мобильная и десктопная версии.
-																			
-																		</li>
-																		<li>Кросс-браузерная верcтка (для Google Chrome, Mozilla FireFox, Safari, Opera). Поддержка до 7 версий каждого браузера.</li>
-																		<li>Оптимизировать все страницы сайта для SEO.</li>
-																		<li>Интерактив: настроить отправку форм обратной связи на почту заказчика.</li>
-																		
-																	</ul>
-																</p>
 
-																
-																<p class="spical">
-																		<span>Результат работы:</span>
-																</p>
-																<p class="descr">
-																	Все требования заказчика реализованы. 
-																	
-																	<ul class="post-ul">
-																		<li>Сайт собран согласно предоставленному PSD-макету.</li>	
-															
-																		<li>Лендинг оптимизирован под SEO.</li>
-																		
-																		<li>Все формы обратной связи (отправка) настроены на email заказчика.</li>
-
-																	</ul>
-																</p>
-
-																<p class="spical"><span>Используемые языки программирования, библиотеки и технологии: </span>
-
-																</p>
-																<p class="tags">
-																	<span>HTML5</span>, &nbsp;
-																	<span>CSS3</span>,&nbsp;
-																	<span>JavaScript</span>,&nbsp;
-																	<span>AJAX</span>,&nbsp;
-																	<span>jQuery v.3</span>,&nbsp;
-																	<span>Bootstrap v.3</span>,&nbsp;
-																	<span>PHP</span>															
-																</p>
-
-
-															</div>
-						
-															<div class="share-post" style="text-align: center;">
-																<span><a href="//nastyakarelskaya.ru/good-cardboard/" target="_blank">Ссылка на проект</a></span>
-																
-															</div>
-															<div class="order" style="margin-top: 20px;">
-																<span class="buton"><a href="#" class="call-to-act"  data-scroll-nav="6">Заказать сайт</a></span>
-															</div>
-														
-						
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div> 
-							</div>  <!-- ./portfolio-item -->
-						</div>
-
-						<!-- gallery item -->
-						<div class="col-md-4 col-sm-6 items landing">
-							<div class="item-img">
-								<img src="<?php echo get_template_directory_uri() . '/assets/img/portfolio/4.jpg';?>" alt="image">
-								<div class="item-img-overlay">
-									<div class="overlay-info v-middle text-center">
-										<h6 class="sm-titl">Bellom.com</h6>
-										<div class="icons">
-											<span class="icon ">
-												<a href="#portfolio-item-4" class="open-popup">
-													<i class="fa fa-search-plus" aria-hidden="true"></i>
-												</a>
-											</span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div id="portfolio-item-4" class="portfolio-popup popup-window mfp-hide" >
-								<div class="popup-header">
-										<div class="popup-title">
-											<h5>
-												<a href="#0">Верстка сайта для «Bellom.com»</a>
-											</h5>
-										</div>
-								</div>
-								<div class="popup-body blogs">	
-									<div class="container">
-										<div class="row">
-											
-											<div class="col-12">
-												<div class="posts">
-						
-													<div class="post">
-														<div class="post-img">
-															<a href="//nastyakarelskaya.ru/good-cardboard/"  target="_blank">
-																<img src="<?php echo get_template_directory_uri() . '/assets/img/portfolio/good-cardboard.png';?>" alt="Добрый картон">
-															</a>
-														</div>
-														<div class="content text-center">
-															<div class="post-meta">
-																<ul class="meta">
-																	<li>
-																		<div>
-																			<i class="fa fa-calendar" aria-hidden="true"></i>
-																			Июль 2018
-																		</div>
-																	</li>
-																	<li>
-																		<div>
-																			<i class="fa fa-tags" aria-hidden="true"></i>
-																			Многостраничники
-																		</div>
-																	</li>
-																	
-																</ul>
-															</div>
-						
-															<div class="post-cont">
-																<p class="spical">
-																		<span>Цель проекта:</span> верстка по макету новой версии сайта для «Bellom.com»
-																		
-																</p>
-																<p class="descr">
-																		Компания занимается производством упаковки из гофрокартона.
-																</p>
-																
-																<p class="spical">
-																		<span>Задачи проекта:</span>
-																</p>
-																<p class="descr">
-																	<ul class="post-ul">
-																		<li>
-																			Верстка сайта по PSD-макету: мобильная и десктопная версии.
-																			
-																		</li>
-																		<li>Кросс-браузерная верcтка (для Google Chrome, Mozilla FireFox, Safari, Opera). Поддержка до 7 версий каждого браузера.</li>
-																		<li>Оптимизировать все страницы сайта для SEO.</li>
-																		<li>Интерактив: настроить отправку форм обратной связи на почту заказчика.</li>
-																		
-																	</ul>
-																</p>
-
-																
-																<p class="spical">
-																		<span>Результат работы:</span>
-																</p>
-																<p class="descr">
-																	Все требования заказчика реализованы. 
-																	
-																	<ul class="post-ul">
-																		<li>Сайт собран согласно предоставленному PSD-макету.</li>	
-															
-																		<li>Лендинг оптимизирован под SEO.</li>
-																		
-																		<li>Все формы обратной связи (отправка) настроены на email заказчика.</li>
-
-																	</ul>
-																</p>
-
-																<p class="spical"><span>Используемые языки программирования, библиотеки и технологии: </span>
-
-																</p>
-																<p class="tags">
-																	<span>HTML5</span>, &nbsp;
-																	<span>CSS3</span>,&nbsp;
-																	<span>JavaScript</span>,&nbsp;
-																	<span>AJAX</span>,&nbsp;
-																	<span>jQuery v.3</span>,&nbsp;
-																	<span>Bootstrap v.3</span>,&nbsp;
-																	<span>PHP</span>															
-																</p>
-
-
-															</div>
-						
-															<div class="share-post" style="text-align: center;">
-																<span><a href="//nastyakarelskaya.ru/good-cardboard/" target="_blank">Ссылка на проект</a></span>
-																
-															</div>
-															<div class="order" style="margin-top: 20px;">
-																<span class="buton"><a href="#" class="call-to-act"  data-scroll-nav="6">Заказать сайт</a></span>
-															</div>
-														
-						
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div> 
-							</div>  <!-- ./portfolio-item -->
-						</div>
 
 					</div>
 				</div><!-- /row -->
@@ -879,98 +350,10 @@ get_template_part('menuandpreloader');
 		<!--====== End clients ======-->
 
 
-		<!--====== Blog ======-->
-		<section class="blog section-padding " data-scroll-index="5">
-			<div class="container">
-				<div class="row">
-
-					<!-- section heading -->
-					<div class="section-head">
-						<h3>Блог.</h3>
-					</div>
-
-					<!-- owl carsouel -->
-					<div class="owl-carousel owl-theme">
-
-						<!-- pitems -->
-						<div class="pitem">
-							<div class="post-img">
-								<img src="img/blog/1.jpg" alt="">
-							</div>
-							<div class="content">
-								<h6 class="tag">
-									<a href="#0">WordPress</a>
-								</h6>
-								<h4>
-									<a href="#0">Top WordPress Themes and Plugins for Hotels, Travel, and</a>
-								</h4>
-								<span class="more">
-									<a href="#0">Read More</a>
-								</span>
-							</div>
-						</div>
-
-						<div class="pitem">
-							<div class="post-img">
-								<img src="img/blog/2.jpg" alt="">
-							</div>
-							<div class="content">
-								<h6 class="tag">
-									<a href="#0">Trends</a>
-								</h6>
-								<h4>
-									<a href="#0">Master These Awesome New Skills in March 2018</a>
-								</h4>
-								<span class="more">
-									<a href="#0">Read More</a>
-								</span>
-							</div>
-						</div>
-
-						<div class="pitem">
-							<div class="post-img">
-								<img src="img/blog/3.jpg" alt="">
-							</div>
-							<div class="content">
-								<h6 class="tag">
-									<a href="#0">Themeforest</a>
-								</h6>
-								<h4>
-									<a href="#0">The 20 Best Lightroom Presets You Need to Know About</a>
-								</h4>
-								<span class="more">
-									<a href="#0">Read More</a>
-								</span>
-							</div>
-						</div>
-
-						<div class="pitem">
-							<div class="post-img">
-								<img src="img/blog/4.jpg" alt="">
-							</div>
-							<div class="content">
-								<h6 class="tag">
-									<a href="#0">Trends</a>
-								</h6>
-								<h4>
-									<a href="#0">Best Design Items to Appeal to the Millennial Generation</a>
-								</h4>
-								<span class="more">
-									<a href="#0">Read More</a>
-								</span>
-							</div>
-						</div>
-					</div>
-
-				</div><!-- /row -->
-			</div><!-- /container -->
-		</section>
-		<!--====== End Blog ======-->
-
-		
+			
 
 		<!--====== Contact ======-->
-		<section class="contact section-padding bg-gray" data-scroll-index="6">
+		<section class="contact section-padding" data-scroll-index="6">
 			<div class="container">
 				<div class="row">
 					
